@@ -1,0 +1,17 @@
+name: GitHub Actions Godot build web test
+on: [push]
+jobs:
+  Explore-GitHub-Actions-Godot-Web:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.5.1
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Build app
+        run: godot --export "HTML5" "bin/index.html"
+      - name: Upload app artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: html5-app
+          path: bin/index.html
