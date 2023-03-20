@@ -6,15 +6,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Build
-        id: build
-        uses: manleydev/build-godot-action@v1.4.1
-        with:
-          name: example
-          preset: HTML5
-          package: true
-      - name: Upload Artifact
+      - name: Build app
+        run: godot --export "HTML5" "bin/index.html"
+      - name: Upload app artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Result
-          path: ~/**/artifact.zip
+          name: html5-app
+          path: bin/index.html
